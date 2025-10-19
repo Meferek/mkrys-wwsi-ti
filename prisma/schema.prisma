@@ -14,7 +14,7 @@ datasource db {
 }
 
 // Członkowie biblioteki (Czytelnicy)
-model Member {
+model Members {
     id        String   @id @default(auto()) @map("_id") @db.ObjectId
     name      String
     email     String   @unique
@@ -22,13 +22,13 @@ model Member {
     updatedAt DateTime @updatedAt
     
     // Relacja: jeden członek może mieć wiele wypożyczeń
-    loans     Loan[]
+    loans     Loans[]
     
     @@map("members")
 }
 
 // Książki
-model Book {
+model Books {
     id          String   @id @default(auto()) @map("_id") @db.ObjectId
     isbn        String?  @unique
     title       String
@@ -43,21 +43,21 @@ model Book {
     updatedAt   DateTime @updatedAt
     
     // Relacja: jedna książka może być wielokrotnie wypożyczona
-    loans       Loan[]
+    loans       Loans[]
     
     @@map("books")
 }
 
 // Wypożyczenia
-model Loan {
+model Loans {
     id         String    @id @default(auto()) @map("_id") @db.ObjectId
     
     // Relacje
     memberId   String    @db.ObjectId
-    member     Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    member     Members   @relation(fields: [memberId], references: [id], onDelete: Cascade)
     
     bookId     String    @db.ObjectId
-    book       Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+    book       Books     @relation(fields: [bookId], references: [id], onDelete: Cascade)
     
     // Daty
     loanDate   DateTime  @default(now())
