@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+// Członkowie biblioteki (Czytelnicy)
+model Member {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    email     String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    
+    // Relacja: jeden członek może mieć wiele wypożyczeń
+    loans     Loan[]
+    
+    @@map("members")
+}
+
+// Książki
+model Book {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    isbn        String?  @unique
+    title       String
+    author      String
+    year        String?
+    publisher   String?
+    imageUrlS   String?
+    imageUrlM   String?
+    imageUrlL   String?
+    copies      Int      @default(1) // liczba egzemplarzy
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    
+    // Relacja: jedna książka może być wielokrotnie wypożyczona
+    loans       Loan[]
+    
+    @@map("books")
+}
+
+// Wypożyczenia
+model Loan {
+    id         String    @id @default(auto()) @map("_id") @db.ObjectId
+    
+    // Relacje
+    memberId   String    @db.ObjectId
+    member     Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    
+    bookId     String    @db.ObjectId
+    book       Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+    
+    // Daty
+    loanDate   DateTime  @default(now())
+    dueDate    DateTime
+    returnDate DateTime? // NULL = aktywne wypożyczenie
+    
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+    
+    @@map("loans")
+}
