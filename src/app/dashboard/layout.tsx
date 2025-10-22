@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
         <TableDataProvider>
-            <div className="flex w-screen h-screen bg-royal-blue-50/10 gap-4">
+            <div className="flex w-screen h-screen bg-royal-blue-50/50 gap-4">
                 
                 <Navbar />
                 

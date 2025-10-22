@@ -2,9 +2,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const params = await context.params;
         const { id } = params;
         const body = await request.json();
         const { returnDate } = body;
@@ -66,7 +67,7 @@ export async function PATCH(
             data: updatedLoan,
             message: "Książka została zwrócona pomyślnie",
             status: 200 
-        });
+        }, { status: 200 });
     } catch (error) {
         console.error("Błąd podczas zwrotu książki:", error);
         return Response.json({ 

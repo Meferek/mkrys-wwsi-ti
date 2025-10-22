@@ -2,9 +2,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const params = await context.params;
         const { id } = params;
 
         const member = await prisma.members.findUnique({
@@ -60,7 +61,7 @@ export async function GET(
             status: 200
         };
 
-        return Response.json(response);
+    return Response.json(response);
 
     } catch (error) {
         console.error("Błąd podczas pobierania szczegółów członka:", error);
