@@ -20,6 +20,7 @@ export async function GET(request: Request) {
                 publisher: true,
                 copies: true,
                 createdAt: true,
+                imageUrlL: true,
                 loans: {
                     select: {
                         id: true,
@@ -44,6 +45,7 @@ export async function GET(request: Request) {
                 copies: book.copies,
                 loanedCopies,
                 availableCopies,
+                imageUrlL: book.imageUrlL,
                 createdAt: book.createdAt
             };
         });

@@ -6,7 +6,7 @@ Pełnofunkcjonalna aplikacja webowa do zarządzania wypożyczalnią książek. S
 
 ### Główne funkcjonalności
 
-- **📖 Katalog książek** - Baza ~270,000 książek z pełnymi metadanymi (tytuł, autor, ISBN, wydawca, okładki)
+- **📖 Katalog książek** - Baza ~10,000 książek z pełnymi metadanymi (tytuł, autor, ISBN, wydawca, okładki)
 - **👥 Zarządzanie czytelnikami** - Rejestracja i zarządzanie członkami wypożyczalni
 - **🔄 System wypożyczeń** - Wypożyczanie i zwracanie książek z kontrolą dostępności
 - **📊 Monitoring** - Śledzenie aktywnych wypożyczeń i historii
