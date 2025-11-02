@@ -27,7 +27,7 @@ export default function Page() {
             <Card title="Członkowie biblioteki" subtitle="Lista zarejestrowanych członków"></Card>
 
             <Table 
-                fetchURL="/api/members"
+                fetchURL="/api/lab1/members"
                 columns={ columns }
             />
 

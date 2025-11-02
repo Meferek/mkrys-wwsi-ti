@@ -6,10 +6,10 @@ import ImportContactsOutlinedIcon from '@mui/icons-material/ImportContactsOutlin
 import { Button } from "@mui/material";
 
 const links = [
-    { href: "/dashboard", label: "Główna", icon: <HomeOutlinedIcon /> },
-    { href: "/dashboard/books", label: "Książki", icon: <BookOutlinedIcon /> },
-    { href: "/dashboard/members", label: "Członkowie", icon: <GroupOutlinedIcon /> },
-    { href: "/dashboard/loans", label: "Wypożyczenia", icon: <ImportContactsOutlinedIcon /> },
+    { href: "/dashboard/lab1", label: "Główna", icon: <HomeOutlinedIcon /> },
+    { href: "/dashboard/lab1/books", label: "Książki", icon: <BookOutlinedIcon /> },
+    { href: "/dashboard/lab1/members", label: "Członkowie", icon: <GroupOutlinedIcon /> },
+    { href: "/dashboard/lab1/loans", label: "Wypożyczenia", icon: <ImportContactsOutlinedIcon /> },
 ]
 
 const Navbar = () => {

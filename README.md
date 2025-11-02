@@ -89,12 +89,12 @@ Otwórz [http://localhost:3000](http://localhost:3000)
 
 Aplikacja udostępnia RESTful API z następującymi endpointami:
 
-### 📚 Książki (`/api/books`)
+### 📚 Książki (`/api/lab1/books`)
 
 ```
-GET    /api/books              - Lista wszystkich książek (paginacja, search)
-GET    /api/books?search=...   - Wyszukiwanie książek
-GET    /api/books/[id]/availability - Sprawdzenie dostępności książki
+GET    /api/lab1/books              - Lista wszystkich książek (paginacja, search)
+GET    /api/lab1/books?search=...   - Wyszukiwanie książek
+GET    /api/lab1/books/[id]/availability - Sprawdzenie dostępności książki
 ```
 
 **Przykładowa odpowiedź:**
@@ -111,37 +111,37 @@ GET    /api/books/[id]/availability - Sprawdzenie dostępności książki
 }
 ```
 
-### 👥 Czytelnicy (`/api/members`)
+### 👥 Czytelnicy (`/api/lab1/members`)
 
 ```
-GET    /api/members            - Lista wszystkich członków
-POST   /api/members            - Dodanie nowego członka
-GET    /api/members/[id]       - Szczegóły członka
-PUT    /api/members/[id]       - Aktualizacja danych członka
-DELETE /api/members/[id]       - Usunięcie członka
+GET    /api/lab1/members            - Lista wszystkich członków
+POST   /api/lab1/members            - Dodanie nowego członka
+GET    /api/lab1/members/[id]       - Szczegóły członka
+PUT    /api/lab1/members/[id]       - Aktualizacja danych członka
+DELETE /api/lab1/members/[id]       - Usunięcie członka
 ```
 
 **Przykład tworzenia członka:**
 ```json
-POST /api/members
+POST /api/lab1/members
 {
   "name": "Jan Kowalski",
   "email": "jan.kowalski@example.com"
 }
 ```
 
-### 🔄 Wypożyczenia (`/api/loans`)
+### 🔄 Wypożyczenia (`/api/lab1/loans`)
 
 ```
-GET    /api/loans              - Lista wszystkich wypożyczeń
-POST   /api/loans              - Utworzenie nowego wypożyczenia
-GET    /api/loans?active=true  - Tylko aktywne wypożyczenia
-POST   /api/loans/[id]/return  - Zwrot książki
+GET    /api/lab1/loans              - Lista wszystkich wypożyczeń
+POST   /api/lab1/loans              - Utworzenie nowego wypożyczenia
+GET    /api/lab1/loans?active=true  - Tylko aktywne wypożyczenia
+POST   /api/lab1/loans/[id]/return  - Zwrot książki
 ```
 
 **Przykład wypożyczenia książki:**
 ```json
-POST /api/loans
+POST /api/lab1/loans
 {
   "memberId": "507f1f77bcf86cd799439011",
   "bookId": "507f191e810c19729de860ea",
@@ -151,7 +151,7 @@ POST /api/loans
 
 **Zwrot książki:**
 ```json
-POST /api/loans/[id]/return
+POST /api/lab1/loans/[id]/return
 {
   "returnDate": "2025-10-25T14:30:00Z"
 }
@@ -284,15 +284,15 @@ Użyj Postman, Insomnia lub curl:
 
 ```bash
 # Pobierz listę książek
-curl http://localhost:3000/api/books
+curl http://localhost:3000/api/lab1/books
 
 # Dodaj nowego członka
-curl -X POST http://localhost:3000/api/members \
+curl -X POST http://localhost:3000/api/lab1/members \
   -H "Content-Type: application/json" \
   -d '{"name":"Jan Kowalski","email":"jan@example.com"}'
 
 # Wypożycz książkę
-curl -X POST http://localhost:3000/api/loans \
+curl -X POST http://localhost:3000/api/lab1/loans \
   -H "Content-Type: application/json" \
   -d '{"memberId":"...","bookId":"...","dueDate":"2025-11-30"}'
 ```

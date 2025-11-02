@@ -25,12 +25,12 @@ const AddNewMemberForm = () => {
         setErrorMessage('');
 
         try {
-            const response = await fetchDataPOST('/api/members', data as unknown as Record<string, unknown>);
+            const response = await fetchDataPOST('/api/lab1/members', data as unknown as Record<string, unknown>);
 
             if (response.status === 201) {
                 setSuccessMessage('Członek został dodany pomyślnie!');
                 reset();
-                mutate((key) => typeof key === 'string' && key.startsWith('/api/members'));
+                mutate((key) => typeof key === 'string' && key.startsWith('/api/lab1/members'));
             } else {
                 setErrorMessage(response.error || 'Wystąpił błąd podczas dodawania członka');
             }

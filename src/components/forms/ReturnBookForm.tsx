@@ -36,14 +36,14 @@ const ReturnBookForm = ({ loanId, onSuccess }: ReturnBookFormProps) => {
 
         try {
             const response = await fetchDataPATCH(
-                `/api/loans/${loanId}/return`, 
+                `/api/lab1/loans/${loanId}/return`, 
                 { returnDate: data.returnDate } as Record<string, unknown>
             );
 
             if (response.status === 200) {
                 setSuccessMessage('Książka została zwrócona pomyślnie!');
                 
-                mutate((key) => typeof key === 'string' && (key.startsWith('/api/books') || key.startsWith('/api/loans')));
+                mutate((key) => typeof key === 'string' && (key.startsWith('/api/lab1/books') || key.startsWith('/api/lab1/loans')));
                 
                 if (onSuccess) {
                     setTimeout(() => onSuccess(), 1500);

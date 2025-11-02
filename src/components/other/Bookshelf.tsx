@@ -21,7 +21,7 @@ const Bookshelf = () => {
 
         try {
 
-            const response = await fetchDataGET(`/api/books?page=${pagination.page - 1}&pageSize=${pagination.pageSize}`);
+            const response = await fetchDataGET(`/api/lab1/books?page=${pagination.page - 1}&pageSize=${pagination.pageSize}`);
             setBooks(response.data);
             setTotalCount(response.totalCount || 0);
 

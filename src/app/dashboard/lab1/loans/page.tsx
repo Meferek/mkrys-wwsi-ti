@@ -9,7 +9,7 @@ export default function Page() {
             <Card title="Wypożyczenia książek" subtitle="Lista wszystkich wypożyczeń"></Card>
 
             <Table 
-                fetchURL="/api/loans"
+                fetchURL="/api/lab1/loans"
                 columns={ LoansTableColumns }
             />
 

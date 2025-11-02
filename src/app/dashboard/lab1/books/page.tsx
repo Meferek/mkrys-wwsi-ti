@@ -37,7 +37,7 @@ export default function Page() {
             <Card title="Książki dostępne w systemie" subtitle="Lista dostępnych książek"></Card>
 
             <Table 
-                fetchURL="/api/books"
+                fetchURL="/api/lab1/books"
                 columns={ columns }
             />
 

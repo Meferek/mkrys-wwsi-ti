@@ -53,18 +53,16 @@ const LoanBookForm = ({ onSuccess }: LoanBookFormProps = {}) => {
     const [checkingAvailability, setCheckingAvailability] = useState(false);
     const { mutate } = useSWRConfig();
 
-    // Fetcher dla SWR
     const fetcher = async (url: string) => {
         const response = await fetchDataGET(url);
         return response;
     };
 
-    // Użyj SWR do pobierania członków i książek
-    const { data: membersResponse, isLoading: loadingMembers } = useSWR('/api/members?pageSize=1000', fetcher, {
+    const { data: membersResponse, isLoading: loadingMembers } = useSWR('/api/lab1/members', fetcher, {
         revalidateOnFocus: true,
         revalidateOnMount: true,
     });
-    const { data: booksResponse, isLoading: loadingBooks } = useSWR('/api/books?pageSize=1000', fetcher, {
+    const { data: booksResponse, isLoading: loadingBooks } = useSWR('/api/lab1/books', fetcher, {
         revalidateOnFocus: true,
         revalidateOnMount: true,
     });
@@ -72,7 +70,6 @@ const LoanBookForm = ({ onSuccess }: LoanBookFormProps = {}) => {
     const members = membersResponse?.data || [];
     const allBooks = booksResponse?.data || [];
     
-    // Filtruj tylko dostępne książki
     const books = allBooks.filter((book: Book) => book.availableCopies > 0);
     const loadingData = loadingMembers || loadingBooks;
 
@@ -86,7 +83,6 @@ const LoanBookForm = ({ onSuccess }: LoanBookFormProps = {}) => {
     const selectedBookId = watch('bookId');
     const selectedBook = books.find((book: Book) => book.id === selectedBookId);
 
-    // Realtime sprawdzanie dostępności gdy użytkownik wybierze książkę
     useEffect(() => {
         const checkAvailability = async () => {
             if (!selectedBookId) {
@@ -96,7 +92,7 @@ const LoanBookForm = ({ onSuccess }: LoanBookFormProps = {}) => {
 
             setCheckingAvailability(true);
             try {
-                const response = await fetchDataGET(`/api/books/${selectedBookId}/availability`);
+                const response = await fetchDataGET(`/api/lab1/books/${selectedBookId}/availability`);
                 if (response.status === 200) {
                     setRealtimeAvailability(response.data);
                 }
@@ -111,15 +107,15 @@ const LoanBookForm = ({ onSuccess }: LoanBookFormProps = {}) => {
     }, [selectedBookId]);
 
     const onSubmit = async (data: LoanFormData) => {
+        
         setLoading(true);
         setSuccessMessage('');
         setErrorMessage('');
 
         try {
-            // KROK 1: REALTIME sprawdzenie dostępności książki przed wysłaniem formularza
-            console.log(`🔍 Sprawdzam dostępność książki: ${data.bookId}`);
+
             
-            const availabilityResponse = await fetchDataGET(`/api/books/${data.bookId}/availability`);
+            const availabilityResponse = await fetchDataGET(`/api/lab1/books/${data.bookId}/availability`);
             
             if (availabilityResponse.status !== 200) {
                 setErrorMessage('Nie udało się sprawdzić dostępności książki');
@@ -128,53 +124,55 @@ const LoanBookForm = ({ onSuccess }: LoanBookFormProps = {}) => {
             }
 
             const availability = availabilityResponse.data;
-            console.log(`📊 Dostępność:`, availability);
 
-            // KROK 2: Sprawdź czy książka jest dostępna
             if (!availability.isAvailable || availability.availableCopies <= 0) {
                 setErrorMessage(
                     `Książka "${availability.title}" nie jest już dostępna! ` +
                     `(Aktywne wypożyczenia: ${availability.activeLoans}/${availability.totalCopies})`
                 );
                 
-                // Odśwież listę książek w tle
-                await mutate('/api/books?pageSize=1000');
+                await mutate('/api/lab1/books');
                 setLoading(false);
                 return;
             }
 
             console.log(`✅ Książka dostępna - wysyłam formularz`);
 
-            // KROK 3: Wyślij formularz wypożyczenia
-            const response = await fetchDataPOST('/api/loans', data as unknown as Record<string, unknown>);
+            const response = await fetchDataPOST('/api/lab1/loans', data as unknown as Record<string, unknown>);
 
             if (response.status === 201) {
                 setSuccessMessage('Książka została wypożyczona pomyślnie!');
                 
-                // Odśwież dane w cache SWR - MUSI być przed reset()
-                await mutate('/api/books?pageSize=1000');
-                await mutate('/api/loans?pageSize=1000');
+                await mutate('/api/lab1/books');
+                await mutate('/api/lab1/loans');
                 
                 reset();
                 
-                // Wywołaj callback jeśli został przekazany
                 if (onSuccess) {
                     setTimeout(() => onSuccess(), 1500);
                 }
             } else if (response.status === 409) {
-                // Książka nie jest dostępna (conflict)
+
                 setErrorMessage(response.error || 'Książka nie jest już dostępna');
-                // Odśwież listę książek
-                await mutate('/api/books?pageSize=1000');
+                await mutate('/api/lab1/books');
+
             } else {
+
                 setErrorMessage(response.error || 'Wystąpił błąd podczas wypożyczania książki');
+
             }
+
         } catch (error) {
+
             console.error('Błąd:', error);
             setErrorMessage('Wystąpił błąd podczas wypożyczania książki');
+
         } finally {
+
             setLoading(false);
+
         }
+
     };
 
     if (loadingData) {

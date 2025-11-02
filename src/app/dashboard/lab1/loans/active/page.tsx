@@ -8,7 +8,7 @@ export default function Page() {
             <Card title="Aktywne wypożyczenia" subtitle="Lista aktywnych wypożyczeń książek"></Card>
 
             <Table 
-                fetchURL="/api/loans?active=true"
+                fetchURL="/api/lab1/loans"
                 columns={ LoansTableColumns }
             />
         </>

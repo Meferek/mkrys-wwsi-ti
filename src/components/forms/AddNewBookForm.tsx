@@ -34,12 +34,12 @@ const AddNewBookForm = () => {
         setErrorMessage('');
 
         try {
-            const response = await fetchDataPOST('/api/books', data as Record<string, unknown>);
+            const response = await fetchDataPOST('/api/lab1/books', data as Record<string, unknown>);
 
             if (response.status === 201) {
                 setSuccessMessage('Książka została dodana pomyślnie!');
                 reset();
-                mutate((key) => typeof key === 'string' && key.startsWith('/api/books'));
+                mutate((key) => typeof key === 'string' && key.startsWith('/api/lab1/books'));
             } else {
                 setErrorMessage(response.error || 'Wystąpił błąd podczas dodawania książki');
             }
