@@ -6,13 +6,10 @@ import ImportContactsOutlinedIcon from '@mui/icons-material/ImportContactsOutlin
 import { Button } from "@mui/material";
 
 const links = [
-    { href: "/dashboard/lab1", label: "Główna", icon: <HomeOutlinedIcon /> },
-    { href: "/dashboard/lab1/books", label: "Książki", icon: <BookOutlinedIcon /> },
-    { href: "/dashboard/lab1/members", label: "Członkowie", icon: <GroupOutlinedIcon /> },
-    { href: "/dashboard/lab1/loans", label: "Wypożyczenia", icon: <ImportContactsOutlinedIcon /> },
+    { href: "/dashboard/lab2", label: "Główna", icon: <HomeOutlinedIcon /> },
 ]
 
-const Navbar = () => {
+const NavbarLab2 = () => {
     return (
         <div className="flex flex-col flex-none w-[300px] rounded-2xl my-4 ml-4 p-4 border-1 border-royal-blue-700/30 overflow-hidden gap-3 bg-white">
                 
@@ -29,4 +26,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default NavbarLab2;

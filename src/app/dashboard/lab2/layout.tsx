@@ -1,4 +1,4 @@
-import NavbarLab1 from "@/components/global/NavbarLab1";
+import NavbarLab2 from "@/components/global/NavbarLab2";
 import { TableDataProvider } from "@/contexts/TableDataContext";
 import type { Metadata } from "next";
 
@@ -12,7 +12,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
         <TableDataProvider>
             <div className="flex w-screen h-screen bg-royal-blue-50/50 gap-4">
                 
-                <NavbarLab1 />
+                <NavbarLab2 />
 
                 <div className="flex flex-col gap-4 flex-1 my-4 mr-4 rounded-2xl overflow-auto scrollbar-hide">
                     { children }
