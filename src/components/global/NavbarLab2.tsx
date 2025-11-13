@@ -1,12 +1,11 @@
 import Link from "next/link";
-import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
-import ImportContactsOutlinedIcon from '@mui/icons-material/ImportContactsOutlined';
 import { Button } from "@mui/material";
 
 const links = [
     { href: "/dashboard/lab2", label: "Główna", icon: <HomeOutlinedIcon /> },
+    { href: "/dashboard/lab2/products", label: "Produkty", icon: <ShoppingCartOutlinedIcon /> },
 ]
 
 const NavbarLab2 = () => {

@@ -12,7 +12,9 @@
     "prisma:studio": "prisma studio",
     "import-books": "tsx scripts/import-books.ts",
     "clear-books": "tsx scripts/clear-books.ts",
-    "check-csv": "tsx scripts/check-csv.ts"
+    "check-csv": "tsx scripts/check-csv.ts",
+    "seed-products": "tsx scripts/seed-products.ts",
+    "reset:db": "npm run prisma:push && npm run seed-products"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
