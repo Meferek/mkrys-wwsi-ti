@@ -4,20 +4,15 @@ import Link from "next/link";
 
 export default function Page() {
     return (
-        <div className="flex flex-col h-screen justify-center items-center text-9xl font-bold gap-2">
-            <Link href="/dashboard/lab1">
+        <div className="flex flex-col h-screen justify-center items-center gap-2">
+            <Link href="/dashboard/lab3/posts">
                 <Button className="w-[320px]" variant="outlined" color="primary" endIcon={<ArrowForwardIosOutlinedIcon className="text-xs" />}>
-                    Przejdź do LAB1
+                    Posty
                 </Button>
             </Link>
-            <Link href="/dashboard/lab2">
+            <Link href="/dashboard/lab3/moderation">
                 <Button className="w-[320px]" variant="outlined" color="primary" endIcon={<ArrowForwardIosOutlinedIcon className="text-xs" />}>
-                    Przejdź do LAB2
-                </Button>
-            </Link>
-            <Link href="/dashboard/lab3">
-                <Button className="w-[320px]" variant="outlined" color="primary" endIcon={<ArrowForwardIosOutlinedIcon className="text-xs" />}>
-                    Przejdź do LAB3
+                    Moderacja komentarzy
                 </Button>
             </Link>
         </div>

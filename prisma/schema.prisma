@@ -105,3 +105,30 @@ model OrderItems {
     
     @@map("order_items")
 }
+
+model Posts {
+    id         String     @id @default(auto()) @map("_id") @db.ObjectId
+    title      String
+    body       String
+    createdAt  DateTime   @default(now())
+    updatedAt  DateTime   @updatedAt
+    
+    comments   Comments[]
+    
+    @@map("posts")
+}
+
+model Comments {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    
+    postId     String   @db.ObjectId
+    post       Posts    @relation(fields: [postId], references: [id], onDelete: Cascade)
+    
+    author     String
+    body       String
+    approved   Int      @default(0) // 0 = czeka na moderację, 1 = zatwierdzony
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    
+    @@map("comments")
+}
